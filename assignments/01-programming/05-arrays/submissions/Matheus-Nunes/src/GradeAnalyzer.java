@@ -2,38 +2,38 @@ import java.util.Scanner;
 
 public class GradeAnalyzer {
 
-    public static double calcularMedia(int[] notas) {
+    public static double calculateAverage(int[] grades) {
         int soma = 0;
-        for (int nota : notas) {
+        for (int nota : grades) {
             soma += nota;
         }
-        return (double) soma / notas.length;
+        return (double) soma / grades.length;
     }
 
-    public static int encontrarMaiorNota(int[] notas) {
-        int maior = notas[0];
-        for (int i = 1; i < notas.length; i++) {
-            if (notas[i] > maior) {
-                maior = notas[i];
+    public static int findHighestGrade(int[] grades) {
+        int maior = grades[0];
+        for (int i = 1; i < grades.length; i++) {
+            if (grades[i] > maior) {
+                maior = grades[i];
             }
         }
         return maior;
     }
 
-    public static int encontrarMenorNota(int[] notas) {
-        int menor = notas[0];
-        for (int i = 1; i < notas.length; i++) {
-            if (notas[i] < menor) {
-                menor = notas[i];
+    public static int findLowestGrade(int[] grades) {
+        int menor = grades[0];
+        for (int i = 1; i < grades.length; i++) {
+            if (grades[i] < menor) {
+                menor = grades[i];
             }
         }
         return menor;
     }
 
-    public static int contarNotasAcimaOuIguaisAMedia(int[] notas) {
-        double media = calcularMedia(notas);
+    public static int countGradesAtOrAboveAverage(int[] grades) {
+        double media = calculateAverage(grades);
         int quantidade = 0;
-        for (int nota : notas) {
+        for (int nota : grades) {
             if (nota >= media) {
                 quantidade++;
             }
@@ -41,9 +41,9 @@ public class GradeAnalyzer {
         return quantidade;
     }
 
-    public static int[] calcularFrequencia(int[] notas) {
+    public static int[] calculateFrequency(int[] grades) {
         int[] frequencia = new int[11];
-        for (int nota : notas) {
+        for (int nota : grades) {
             if (nota == 100) {
                 frequencia[10]++;
             } else {
@@ -53,7 +53,7 @@ public class GradeAnalyzer {
         return frequencia;
     }
 
-    public static String formatarLinhaFrequencia(int indice, int frequencia) {
+    public static String formatFrequencyLine(int indice, int frequencia) {
         if (indice == 10) {
             return String.format("100: %d", frequencia);
         } else {
@@ -88,11 +88,11 @@ public class GradeAnalyzer {
             notas[i] = nota;
         }
 
-        double media = calcularMedia(notas);
-        int maiorNota = encontrarMaiorNota(notas);
-        int menorNota = encontrarMenorNota(notas);
-        int acimaDaMedia = contarNotasAcimaOuIguaisAMedia(notas);
-        int[] frequencia = calcularFrequencia(notas);
+        double media = calculateAverage(notas);
+        int maiorNota = findHighestGrade(notas);
+        int menorNota = findLowestGrade(notas);
+        int acimaDaMedia = countGradesAtOrAboveAverage(notas);
+        int[] frequencia = calculateFrequency(notas);
 
         System.out.printf("%nMédia da turma: %.2f%n", media);
         System.out.printf("Maior nota: %d%n", maiorNota);
@@ -101,7 +101,7 @@ public class GradeAnalyzer {
 
         System.out.println("\nDistribuição de notas:");
         for (int i = 0; i <= 10; i++) {
-            System.out.println(formatarLinhaFrequencia(i, frequencia[i]));
+            System.out.println(formatFrequencyLine(i, frequencia[i]));
         }
 
         leitor.close();
